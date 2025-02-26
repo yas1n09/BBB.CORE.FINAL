@@ -1,0 +1,6 @@
+@BBB.CORE.FINAL.API_HostAddress = http://localhost:5141
+
+GET {{BBB.CORE.FINAL.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
