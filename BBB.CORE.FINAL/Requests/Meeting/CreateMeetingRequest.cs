@@ -2,10 +2,6 @@
 using BBB.CORE.FINAL.Helpers;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace BBB.CORE.FINAL.Requests.Meeting
@@ -15,109 +11,116 @@ namespace BBB.CORE.FINAL.Requests.Meeting
     {
         private static Random random = new Random();
 
+        // Toplantı adı (Zorunlu)
         [XmlElement(ElementName = "name", IsNullable = false)]
-        public string name { get; set; } // Toplantı adı (Zorunlu)
+        public string name { get; set; }
 
+        // Benzersiz toplantı ID'si (Zorunlu)
         [XmlElement(ElementName = "meetingID")]
-        public string meetingID { get; set; } = Guid.NewGuid().ToString(); // Benzersiz toplantı ID'si
+        public string meetingID { get; set; } = Guid.NewGuid().ToString();
 
+        // Toplantı süresi (dakika) (Varsayılan: 0, sınırsız)
         [XmlElement(ElementName = "duration")]
-        public int duration { get; set; } = 0; // Toplantı süresi (dakika)
+        public int duration { get; set; } = 0;
 
+        // Toplantı kaydı yapılacak mı? (Varsayılan: false)
         [XmlElement(ElementName = "record")]
-        public bool record { get; set; } = false; // Kayıt özelliği açık mı?
+        public bool record { get; set; } = false;
 
+        // Moderatör şifresi (Zorunlu)
         [XmlElement(ElementName = "moderatorPW", IsNullable = false)]
-        public string moderatorPW { get; set; } // Moderatör şifresi (Zorunlu)
+        public string moderatorPW { get; set; }
 
+        // Katılımcı şifresi (Zorunlu)
         [XmlElement(ElementName = "attendeePW", IsNullable = false)]
-        public string attendeePW { get; set; } // Katılımcı şifresi (Zorunlu)
+        public string attendeePW { get; set; }
 
+        // Karşılama mesajı (Varsayılan: "Welcome to the meeting!")
         [XmlElement(ElementName = "welcome")]
-        public string welcome { get; set; } = "Welcome to the meeting!"; // Karşılama mesajı
+        public string welcome { get; set; } = "Welcome to the meeting!";
 
+        // Toplantı telefon numarası (Opsiyonel)
         [XmlElement(ElementName = "dialNumber")]
-        public string dialNumber { get; set; } // Toplantı telefon numarası
+        public string dialNumber { get; set; }
 
+        // Ses köprüsü numarası (Varsayılan: Rastgele 1000-9999999 arası)
         [XmlElement(ElementName = "voiceBridge")]
-        public int voiceBridge { get; set; }= random.Next(1000, 9999999); // Ses köprüsü numarası
+        public int voiceBridge { get; set; } = random.Next(1000, 9999999);
 
+        // Maksimum katılımcı sayısı (Varsayılan: 0, sınırsız)
         [XmlElement(ElementName = "maxParticipants")]
-        public int maxParticipants { get; set; } = 0; // Maksimum katılımcı sayısı (0: sınırsız)
+        public int maxParticipants { get; set; } = 0;
 
+        // Başlangıçta tüm katılımcıları susturma (Varsayılan: true)
         [XmlElement(ElementName = "muteOnStart")]
-        public bool? muteOnStart { get; set; } // Başlangıçta tüm katılımcıları susturma
+        public bool muteOnStart { get; set; } = true;
 
+        // Sadece moderatör için webcam (Varsayılan: false)
         [XmlElement(ElementName = "webcamsOnlyForModerator")]
-        public bool? webcamsOnlyForModerator { get; set; } // Sadece moderatör için webcam
+        public bool webcamsOnlyForModerator { get; set; } = false;
 
+        // Çıkış URL'si (Opsiyonel)
         [XmlElement(ElementName = "logoutURL")]
-        public string logoutURL { get; set; } // Çıkış URL'si
+        public string logoutURL { get; set; }
 
-        [XmlElement(ElementName = "allowOverrideClientSettingsOnCreateCall")]
-        public bool? allowOverrideClientSettingsOnCreateCall { get; set; } // Ayarları geçersiz kılma
-
-        [XmlElement(ElementName = "isBreakout")]
-        public bool? isBreakout { get; set; } // Breakout toplantısı mı?
-
-        [XmlElement(ElementName = "parentMeetingID")]
-        public string parentMeetingID { get; set; } = "bbb-none"; // Ana toplantı ID'si
-
-        [XmlElement(ElementName = "sequence")]
-        public int? sequence { get; set; } // Sıralama değeri
-
+        // Meta veriler (Opsiyonel)
         [XmlElement(ElementName = "meta")]
-        public List<MetaData> meta { get; set; } = new List<MetaData>(); // Meta veriler
+        public List<MetaData> meta { get; set; } = new List<MetaData>();
 
-        [XmlElement(ElementName = "freeJoin")]
-        public bool? freeJoin { get; set; } // Şifre gerekmeden katılım
-
+        // Toplantı başlangıcında otomatik kayıt başlatma (Varsayılan: false)
         [XmlElement(ElementName = "autoStartRecording")]
-        public bool? autoStartRecording { get; set; } // Toplantı başlangıcında kayıt başlatma
+        public bool autoStartRecording { get; set; } = false;
 
+        // Kayıt başlat/durdur izni (Varsayılan: true)
         [XmlElement(ElementName = "allowStartStopRecording")]
-        public bool? allowStartStopRecording { get; set; } // Kayıt başlat/durdur izni
+        public bool allowStartStopRecording { get; set; } = true;
 
+        // Toplantı logosu URL'si (Opsiyonel)
         [XmlElement(ElementName = "logo")]
-        public string logo { get; set; } // Toplantı logosu URL'si
+        public string logo { get; set; }
 
+        // Banner metni (Opsiyonel)
         [XmlElement(ElementName = "bannerText")]
-        public string bannerText { get; set; } // Banner metni
+        public string bannerText { get; set; }
 
+        // Banner rengi (Opsiyonel)
         [XmlElement(ElementName = "bannerColor")]
-        public string bannerColor { get; set; } // Banner rengi
+        public string bannerColor { get; set; }
 
+        // Telif hakkı bilgisi (Opsiyonel)
         [XmlElement(ElementName = "copyright")]
-        public string copyright { get; set; } // Telif hakkı bilgisi
+        public string copyright { get; set; }
 
-        [XmlElement(ElementName = "allowModsToUnmuteUsers")]
-        public bool? allowModsToUnmuteUsers { get; set; } // Moderatörlerin katılımcıları susturmayı kaldırmasına izin
-
+        // Kamera kullanımını engelle (Varsayılan: false)
         [XmlElement(ElementName = "lockSettingsDisableCam")]
-        public bool? lockSettingsDisableCam { get; set; } // Kamera kullanımını engelle
+        public bool lockSettingsDisableCam { get; set; } = false;
 
+        // Mikrofon kullanımını engelle (Varsayılan: false)
         [XmlElement(ElementName = "lockSettingsDisableMic")]
-        public bool? lockSettingsDisableMic { get; set; } // Mikrofon kullanımını engelle
+        public bool lockSettingsDisableMic { get; set; } = false;
 
+        // Özel sohbeti engelle (Varsayılan: false)
         [XmlElement(ElementName = "lockSettingsDisablePrivateChat")]
-        public bool? lockSettingsDisablePrivateChat { get; set; } // Özel sohbeti engelle
+        public bool lockSettingsDisablePrivateChat { get; set; } = false;
 
+        // Genel sohbeti engelle (Varsayılan: false)
         [XmlElement(ElementName = "lockSettingsDisablePublicChat")]
-        public bool? lockSettingsDisablePublicChat { get; set; } // Genel sohbeti engelle
+        public bool lockSettingsDisablePublicChat { get; set; } = false;
 
+        // Not kullanımını engelle (Varsayılan: false)
         [XmlElement(ElementName = "lockSettingsDisableNote")]
-        public bool? lockSettingsDisableNote { get; set; } // Not kullanımını engelle
+        public bool lockSettingsDisableNote { get; set; } = false;
 
+        // Kilitli düzen (Varsayılan: false)
         [XmlElement(ElementName = "lockSettingsLockedLayout")]
-        public bool? lockSettingsLockedLayout { get; set; } // Kilitli düzen
+        public bool lockSettingsLockedLayout { get; set; } = false;
 
+        // Katılımcı girişinde kilit (Varsayılan: false)
         [XmlElement(ElementName = "lockSettingsLockOnJoin")]
-        public bool? lockSettingsLockOnJoin { get; set; } // Katılımcı girişinde kilit
+        public bool lockSettingsLockOnJoin { get; set; } = false;
 
-        [XmlElement(ElementName = "lockSettingsLockOnJoinConfigurable")]
-        public bool? lockSettingsLockOnJoinConfigurable { get; set; } // Girişte kilit ayarı yapılandırılabilir mi?
-
+        // Misafir politikası (Varsayılan: "ASK_MODERATOR")
         [XmlElement(ElementName = "guestPolicy")]
-        public string guestPolicy { get; set; } = "ALWAYS_ACCEPT"; // Misafir politikası
+        public string guestPolicy { get; set; } = "ASK_MODERATOR";
     }
 }

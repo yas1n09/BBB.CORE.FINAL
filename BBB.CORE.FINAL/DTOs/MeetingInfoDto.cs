@@ -11,10 +11,7 @@ namespace BBB.CORE.FINAL.DTOs
     [XmlRoot("response")]
     public class MeetingInfoDto
     {
-        //[XmlElement("returncode")]
-        //public string ReturnCode { get; set; }
-        //[XmlElement("messageKey")]
-        //public string MessageKey { get; set; }
+       
 
         [XmlElement("message")]
         public string Message { get; set; }
