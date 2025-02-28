@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 
+
 // BigBlueButtonAPISettings yapýlandýrmasý
 builder.Services.AddOptions();
 builder.Services.AddHttpClient();
@@ -23,6 +24,7 @@ builder.Services.AddScoped<BigBlueButtonAPIClient>(provider =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 
 var app = builder.Build();
 

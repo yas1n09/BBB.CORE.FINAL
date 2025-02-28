@@ -35,6 +35,14 @@ namespace BBB.CORE.FINAL.Requests.Meeting
         [XmlElement(ElementName = "attendeePW", IsNullable = false)]
         public string attendeePW { get; set; }
 
+        // Moderator yoksa toplantı sonlandır (Varsayılan: false)
+        [XmlElement(ElementName = "endWhenNoModerator")]
+        public bool endWhenNoModerator { get; set; } = false;
+
+        // Moderator yoksa toplantı sonlandır (Varsayılan: false)
+        [XmlElement(ElementName = "endWhenNoModeratorDelayInMinutes")]
+        public int endWhenNoModeratorDelayInMinutes { get; set; }
+
         // Karşılama mesajı (Varsayılan: "Welcome to the meeting!")
         [XmlElement(ElementName = "welcome")]
         public string welcome { get; set; } = "Welcome to the meeting!";
@@ -87,10 +95,6 @@ namespace BBB.CORE.FINAL.Requests.Meeting
         [XmlElement(ElementName = "bannerColor")]
         public string bannerColor { get; set; }
 
-        // Telif hakkı bilgisi (Opsiyonel)
-        [XmlElement(ElementName = "copyright")]
-        public string copyright { get; set; }
-
         // Kamera kullanımını engelle (Varsayılan: false)
         [XmlElement(ElementName = "lockSettingsDisableCam")]
         public bool lockSettingsDisableCam { get; set; } = false;
@@ -119,8 +123,8 @@ namespace BBB.CORE.FINAL.Requests.Meeting
         [XmlElement(ElementName = "lockSettingsLockOnJoin")]
         public bool lockSettingsLockOnJoin { get; set; } = false;
 
-        // Misafir politikası (Varsayılan: "ASK_MODERATOR")
+        // Misafir politikası (Varsayılan: "ALWAYS_ACCEPT")
         [XmlElement(ElementName = "guestPolicy")]
-        public string guestPolicy { get; set; } = "ASK_MODERATOR";
+        public string guestPolicy { get; set; }
     }
 }

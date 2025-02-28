@@ -29,21 +29,31 @@ namespace BBB.CORE.FINAL.API.Controllers
         public async Task<IActionResult> CreateMeeting(
     string name,
     string meetingID,
-    bool record = false,
-    int duration = 60,
-    int maxParticipants = 20,
-    bool muteOnStart = true,
-    bool webcamsOnlyForModerator = false,
     string moderatorPW = "",
     string attendeePW = "",
+    int duration = 60,
+    int maxParticipants = 20,
+
+    bool record = true,
+    bool autoStartRecording = true,
+    bool allowStartStopRecording = true,
+
+    bool endWhenNoModerator = false,
+    int endWhenNoModeratorDelayInMinutes = 60,
+    
+
+    bool muteOnStart = true,
+    bool webcamsOnlyForModerator = false,
+    
     string welcome = "Welcome to the meeting!",
     string logoutURL = "",
-    bool autoStartRecording = false,
-    bool allowStartStopRecording = true,
+    
+    
     string logo = "",
     string bannerText = "",
     string bannerColor = "",
-    string copyright = "",
+
+    
     bool lockSettingsDisableCam = false,
     bool lockSettingsDisableMic = false,
     bool lockSettingsDisablePrivateChat = false,
@@ -51,7 +61,7 @@ namespace BBB.CORE.FINAL.API.Controllers
     bool lockSettingsDisableNote = false,
     bool lockSettingsLockedLayout = false,
     bool lockSettingsLockOnJoin = false,
-    string guestPolicy = "ASK_MODERATOR")
+    string guestPolicy = "ALWAYS_ACCEPT")
         {
             try
             {
@@ -59,21 +69,30 @@ namespace BBB.CORE.FINAL.API.Controllers
                 {
                     name = name,
                     meetingID = meetingID,
-                    record = record,
-                    duration = duration,
-                    maxParticipants = maxParticipants,
-                    muteOnStart = muteOnStart,
-                    webcamsOnlyForModerator = webcamsOnlyForModerator,
                     moderatorPW = moderatorPW,
                     attendeePW = attendeePW,
-                    welcome = welcome,
-                    logoutURL = logoutURL,
+                    duration = duration,
+                    maxParticipants = maxParticipants,
+
+                    record = record,
                     autoStartRecording = autoStartRecording,
                     allowStartStopRecording = allowStartStopRecording,
+
+                    endWhenNoModerator = endWhenNoModerator,
+                    endWhenNoModeratorDelayInMinutes = endWhenNoModeratorDelayInMinutes,
+
+                    muteOnStart = muteOnStart,
+                    webcamsOnlyForModerator = webcamsOnlyForModerator,
+                    
+                    
+                    welcome = welcome,
+                    logoutURL = logoutURL,
+                    
+                    
                     logo = logo,
                     bannerText = bannerText,
-                    bannerColor = bannerColor,
-                    copyright = copyright,
+                    bannerColor = bannerColor, 
+                    
                     lockSettingsDisableCam = lockSettingsDisableCam,
                     lockSettingsDisableMic = lockSettingsDisableMic,
                     lockSettingsDisablePrivateChat = lockSettingsDisablePrivateChat,
@@ -97,29 +116,38 @@ namespace BBB.CORE.FINAL.API.Controllers
 
                 return Content(XmlHelper.ToXml(new CreateMeetingResponse
                 {
+                    
                     meetingID = result.meetingID,
-                    internalMeetingID = result.internalMeetingID,
-                    //parentMeetingID = result.parentMeetingID,
+                    internalMeetingID = result.internalMeetingID,                   
                     moderatorPW = result.moderatorPW,
                     attendeePW = result.attendeePW,
-                    createTime = result.createTime,
+                    duration = result.duration,
                     maxParticipants = result.maxParticipants,
+
+                    recording = result.recording,
+                    createDate = result.createDate,
+                    createTime = result.createTime,
                     voiceBridge = result.voiceBridge,
                     dialNumber = result.dialNumber,
-                    createDate = result.createDate,
-                    hasUserJoined = result.hasUserJoined,
-                    duration = result.duration,
-                    hasBeenForciblyEnded = result.hasBeenForciblyEnded,
-                    participantCount = result.participantCount,
-                    listenerCount = result.listenerCount,
-                    voiceParticipantCount = result.voiceParticipantCount,
-                    videoCount = result.videoCount,
-                    recording = result.recording,
                     hasBeenLocked = result.hasBeenLocked,
-                    hasStarted = result.hasStarted,
-                    running = result.running,
                     metadata = result.metadata,
-                    attendeeList = result.attendeeList
+                    endWhenNoModerator = result.endWhenNoModerator,
+                    endWhenNoModeratorDelayInMinutes = result.endWhenNoModeratorDelayInMinutes
+
+
+                    //hasUserJoined = result.hasUserJoined,
+
+                    //hasBeenForciblyEnded = result.hasBeenForciblyEnded,
+                    //participantCount = result.participantCount,
+                    //listenerCount = result.listenerCount,
+                    //voiceParticipantCount = result.voiceParticipantCount,
+                    //videoCount = result.videoCount,
+
+
+                    //hasStarted = result.hasStarted,
+                    //running = result.running,
+
+                    //attendeeList = result.attendeeList
                 }), "application/xml");
             }
             catch (Exception ex)
@@ -133,82 +161,6 @@ namespace BBB.CORE.FINAL.API.Controllers
         }
 
         #endregion
-
-
-
-        //#region Create Meeting
-
-        //[HttpPost("create")]
-        //public async Task<IActionResult> CreateMeeting(string name, string meetingID, bool record = false, int duration = 60, int maxParticipants = 20, bool muteOnStart = true, bool webcamsOnlyForModerator = false, string moderatorPW = "", string attendeePW = "", string welcome = "Welcome to the meeting!", string logoutURL = "")
-        //{
-        //    try
-        //    {
-        //        var request = new CreateMeetingRequest
-        //        {
-        //            name = name,
-        //            meetingID = meetingID,
-        //            record = record,
-        //            duration = duration,
-        //            maxParticipants = maxParticipants,
-        //            muteOnStart = muteOnStart,
-        //            webcamsOnlyForModerator = webcamsOnlyForModerator,
-        //            moderatorPW = moderatorPW,
-        //            attendeePW = attendeePW,
-        //            welcome = welcome,
-        //            logoutURL = logoutURL
-
-        //        };
-
-        //        var result = await client.CreateMeetingAsync(request);
-
-        //        if (result.returncode == Returncode.FAILED)
-        //        {
-        //            return Content(XmlHelper.ToXml(new MeetingErrorResponseDto
-        //            {
-        //                Message = "Failed to create meeting.",
-        //                Details = result.message
-        //            }), "application/xml");
-        //        }
-
-        //        return Content(XmlHelper.ToXml(new CreateMeetingResponse
-        //        {
-        //            meetingID = result.meetingID,
-        //            internalMeetingID = result.internalMeetingID,
-        //            parentMeetingID = result.parentMeetingID,
-        //            moderatorPW = result.moderatorPW,
-        //            attendeePW = result.attendeePW,
-        //            createTime = result.createTime,
-        //            maxParticipants = result.maxParticipants,
-        //            voiceBridge = result.voiceBridge,
-        //            dialNumber = result.dialNumber,
-        //            createDate = result.createDate,
-        //            hasUserJoined = result.hasUserJoined,
-        //            duration = result.duration,
-        //            hasBeenForciblyEnded = result.hasBeenForciblyEnded,
-        //            participantCount = result.participantCount,
-        //            listenerCount = result.listenerCount,
-        //            voiceParticipantCount = result.voiceParticipantCount,
-        //            videoCount = result.videoCount,
-        //            recording = result.recording,
-        //            hasBeenLocked = result.hasBeenLocked,
-        //            hasStarted = result.hasStarted,
-        //            running = result.running,
-        //            metadata = result.metadata,
-        //            attendeeList = result.attendeeList
-        //        }), "application/xml");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(500, XmlHelper.ToXml(new MeetingErrorResponseDto
-        //        {
-        //            Message = "An error occurred during meeting creation.",
-        //            Details = ex.Message
-        //        }));
-        //    }
-        //}
-        //#endregion
-
-
 
         #region End Meeting
 
