@@ -11,6 +11,9 @@
     <Product>BigBlueButton Library</Product>
     <Description>BigBlueButton Core Library For .Net Core 8 API development</Description>
     <PackageIcon>230228.png</PackageIcon>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>BigBlueButton API .NETCORE8</PackageTags>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>

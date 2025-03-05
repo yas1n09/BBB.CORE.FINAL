@@ -361,3 +361,8 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Ignore configuration files
+appsettings.json
+appsettings.*.json
+BigBlueButtonAPISettings.cs
