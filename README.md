@@ -80,7 +80,7 @@ If you would like to contribute, please open an `issue` first to discuss the cha
 
 ## License
 
-This project does not currently contain any license information. To add a license, please include an appropriate license file in the root directory of your project.
+This project does not currently contain any license information.
 
 ## Contact
 
