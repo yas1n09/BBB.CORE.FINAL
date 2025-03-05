@@ -61,6 +61,12 @@ namespace BBB.CORE.FINAL.Responses.Meeting
         [XmlElement("hasBeenForciblyEnded")]
         public bool? hasBeenForciblyEnded { get; set; }
 
+        [XmlElement("HasBeenLocked")]
+        public bool? HasBeenLocked { get; set; }
+
+        [XmlElement("HasStarted")]
+        public bool? HasStarted { get; set; }
+
         [XmlElement("startTime")]
         public long? startTime { get; set; }
 
@@ -85,8 +91,8 @@ namespace BBB.CORE.FINAL.Responses.Meeting
         [XmlElement("moderatorCount")]
         public int? moderatorCount { get; set; }
 
-        [XmlElement("isBreakout")]
-        public bool? isBreakout { get; set; }
+        //[XmlElement("isBreakout")]
+        //public bool? isBreakout { get; set; }
 
 
 

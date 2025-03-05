@@ -4,6 +4,13 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <PackageId>BigBlueButton3.0NetCore8Library</PackageId>
+    <Title>BigBlueButton 3.0 .Net Core 8 Library For API</Title>
+    <Version>1.0.0</Version>
+    <Authors>yas1n09</Authors>
+    <Product>BigBlueButton Library</Product>
+    <Description>BigBlueButton Core Library For .Net Core 8 API development</Description>
+    <PackageIcon>230228.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +20,13 @@
 
   <ItemGroup>
     <Folder Include="Requests\Health\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\..\Desktop\230228.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

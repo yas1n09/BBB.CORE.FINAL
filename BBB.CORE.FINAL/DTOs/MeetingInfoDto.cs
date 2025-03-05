@@ -63,6 +63,12 @@ namespace BBB.CORE.FINAL.DTOs
         [XmlElement("HasBeenForciblyEnded")]
         public bool? HasBeenForciblyEnded { get; set; }
 
+        [XmlElement("HasBeenLocked")]
+        public bool? HasBeenLocked { get; set; }
+
+        [XmlElement("HasStarted")]
+        public bool? HasStarted { get; set; }
+
         [XmlElement("StartTime")]
         public long? StartTime { get; set; }
 

@@ -64,6 +64,16 @@ namespace BBB.CORE.FINAL.Responses.Meeting
         [XmlElement(ElementName = "endWhenNoModeratorDelayInMinutes")]
         public int endWhenNoModeratorDelayInMinutes { get; set; }
 
+        [XmlElement(ElementName = "learningDashboardEnabled")]
+        public bool learningDashboardEnabled { get; set; } = true;
+
+        [XmlElement(ElementName = "learningDashboardCleanupDelayInMinutes")]
+        public int learningDashboardCleanupDelayInMinutes { get; set; } = 1440;
+
+        // Misafir politikası (Varsayılan: "ALWAYS_ACCEPT")
+        [XmlElement(ElementName = "guestPolicy")]
+        public string guestPolicy { get; set; }
+
         // Meta veriler
         [XmlElement(ElementName = "metadata")]
         public string metadata { get; set; }

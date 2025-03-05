@@ -1,5 +1,9 @@
+using BBB.CORE.FINAL.API.Helpers;
 using BBB.CORE.FINAL.BigBlueButtonAPIClient;
+using BBB.CORE.FINAL.Enums;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Any;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,7 +27,11 @@ builder.Services.AddScoped<BigBlueButtonAPIClient>(provider =>
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SchemaFilter<GuestPolicySchemaFilter>(); // Sadece guestPolicy için ayarla
+});
+
 
 
 var app = builder.Build();

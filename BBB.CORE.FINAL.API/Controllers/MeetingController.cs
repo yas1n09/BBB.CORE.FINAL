@@ -40,7 +40,9 @@ namespace BBB.CORE.FINAL.API.Controllers
 
     bool endWhenNoModerator = false,
     int endWhenNoModeratorDelayInMinutes = 60,
-    
+    bool learningDashboardEnabled = true,
+    int learningDashboardCleanupDelayInMinutes = 1440,
+
 
     bool muteOnStart = true,
     bool webcamsOnlyForModerator = false,
@@ -54,6 +56,8 @@ namespace BBB.CORE.FINAL.API.Controllers
     string bannerColor = "",
 
     
+
+
     bool lockSettingsDisableCam = false,
     bool lockSettingsDisableMic = false,
     bool lockSettingsDisablePrivateChat = false,
@@ -61,7 +65,9 @@ namespace BBB.CORE.FINAL.API.Controllers
     bool lockSettingsDisableNote = false,
     bool lockSettingsLockedLayout = false,
     bool lockSettingsLockOnJoin = false,
-    string guestPolicy = "ALWAYS_ACCEPT")
+    [FromQuery] string guestPolicy = "ALWAYS_ACCEPT") // Varsayılan değer
+    //string guestPolicy = "ALWAYS_ACCEPT")
+
         {
             try
             {
@@ -80,6 +86,8 @@ namespace BBB.CORE.FINAL.API.Controllers
 
                     endWhenNoModerator = endWhenNoModerator,
                     endWhenNoModeratorDelayInMinutes = endWhenNoModeratorDelayInMinutes,
+                    learningDashboardEnabled = learningDashboardEnabled,
+                    learningDashboardCleanupDelayInMinutes = learningDashboardCleanupDelayInMinutes,
 
                     muteOnStart = muteOnStart,
                     webcamsOnlyForModerator = webcamsOnlyForModerator,
@@ -100,7 +108,8 @@ namespace BBB.CORE.FINAL.API.Controllers
                     lockSettingsDisableNote = lockSettingsDisableNote,
                     lockSettingsLockedLayout = lockSettingsLockedLayout,
                     lockSettingsLockOnJoin = lockSettingsLockOnJoin,
-                    guestPolicy = guestPolicy
+                    guestPolicy = guestPolicy,
+
                 };
 
                 var result = await client.CreateMeetingAsync(request);
@@ -132,22 +141,11 @@ namespace BBB.CORE.FINAL.API.Controllers
                     hasBeenLocked = result.hasBeenLocked,
                     metadata = result.metadata,
                     endWhenNoModerator = result.endWhenNoModerator,
-                    endWhenNoModeratorDelayInMinutes = result.endWhenNoModeratorDelayInMinutes
+                    endWhenNoModeratorDelayInMinutes = result.endWhenNoModeratorDelayInMinutes,
+                    learningDashboardEnabled = learningDashboardEnabled,
+                    learningDashboardCleanupDelayInMinutes = learningDashboardCleanupDelayInMinutes,
+                    guestPolicy = guestPolicy
 
-
-                    //hasUserJoined = result.hasUserJoined,
-
-                    //hasBeenForciblyEnded = result.hasBeenForciblyEnded,
-                    //participantCount = result.participantCount,
-                    //listenerCount = result.listenerCount,
-                    //voiceParticipantCount = result.voiceParticipantCount,
-                    //videoCount = result.videoCount,
-
-
-                    //hasStarted = result.hasStarted,
-                    //running = result.running,
-
-                    //attendeeList = result.attendeeList
                 }), "application/xml");
             }
             catch (Exception ex)
@@ -316,33 +314,38 @@ namespace BBB.CORE.FINAL.API.Controllers
 
                 var dto = new MeetingInfoDto
                 {
-                    MeetingID = result.meetingID,
                     MeetingName = result.meetingName,
+                    MeetingID = result.meetingID,
                     InternalMeetingID = result.internalMeetingID,
-                    CreateTime = result.createTime,
-                    CreateDate = result.createDate,
-                    VoiceBridge = result.voiceBridge,
-                    DialNumber = result.dialNumber,
-                    AttendeePW = result.attendeePW,
                     ModeratorPW = result.moderatorPW,
+                    AttendeePW = result.attendeePW,
                     Duration = result.duration,
+                    MaxUsers = result.maxUsers,
+                    Running = result.running,
+                    FreeJoin = result.freeJoin,
+                    Sequence = result.sequence,
+
                     ParticipantCount = result.participantCount,
+                    ModeratorCount = result.moderatorCount,
                     ListenerCount = result.listenerCount,
                     VoiceParticipantCount = result.voiceParticipantCount,
                     VideoCount = result.videoCount,
-                    MaxUsers = result.maxUsers,
-                    ModeratorCount = result.moderatorCount,
-                    IsBreakout = result.isBreakout,
-                    BreakoutRooms = result.breakoutRooms ?? new List<string>(),
+
+                    Recording = result.recording,
+                    CreateDate = result.createDate,
+                    CreateTime = result.createTime,                    
+                    VoiceBridge = result.voiceBridge,
+                    DialNumber = result.dialNumber,
+
+                    HasStarted = result.HasStarted,
                     StartTime = result.startTime,
                     EndTime = result.endTime,
-                    ParentMeetingID = result.parentMeetingID,
-                    Sequence = result.sequence,
-                    FreeJoin = result.freeJoin,
-                    Running = result.running,
+                    HasBeenLocked  = result.HasBeenLocked,
                     HasUserJoined = result.hasUserJoined,
-                    Recording = result.recording,
                     HasBeenForciblyEnded = result.hasBeenForciblyEnded,
+
+
+
                     Attendees = result.attendeeList?.Select(a => new AttendeeDto
                     {
                         UserID = a.userID,
@@ -395,9 +398,10 @@ namespace BBB.CORE.FINAL.API.Controllers
                     Message = "Meetings retrieved successfully.",
                     Meetings = meetingsResponse.meetings.meetingList.Select(m => new MeetingInfoDto
                     {
+                        MeetingName = m.meetingName,
                         MeetingID = m.meetingID,
                         InternalMeetingID = m.internalMeetingID,
-                        MeetingName = m.meetingName,
+                        
                         CreateTime = m.createTime,
                         CreateDate = m.createDate,
                         VoiceBridge = m.voiceBridge,

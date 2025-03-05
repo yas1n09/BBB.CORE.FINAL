@@ -39,9 +39,17 @@ namespace BBB.CORE.FINAL.Requests.Meeting
         [XmlElement(ElementName = "endWhenNoModerator")]
         public bool endWhenNoModerator { get; set; } = false;
 
+
         // Moderator yoksa toplantı sonlandır (Varsayılan: false)
         [XmlElement(ElementName = "endWhenNoModeratorDelayInMinutes")]
         public int endWhenNoModeratorDelayInMinutes { get; set; }
+
+        //
+        [XmlElement(ElementName = "learningDashboardEnabled")]
+        public bool learningDashboardEnabled { get; set; } = true;
+
+        [XmlElement(ElementName = "learningDashboardCleanupDelayInMinutes")]
+        public int learningDashboardCleanupDelayInMinutes { get; set; } = 1440;
 
         // Karşılama mesajı (Varsayılan: "Welcome to the meeting!")
         [XmlElement(ElementName = "welcome")]
@@ -82,6 +90,7 @@ namespace BBB.CORE.FINAL.Requests.Meeting
         // Kayıt başlat/durdur izni (Varsayılan: true)
         [XmlElement(ElementName = "allowStartStopRecording")]
         public bool allowStartStopRecording { get; set; } = true;
+
 
         // Toplantı logosu URL'si (Opsiyonel)
         [XmlElement(ElementName = "logo")]
