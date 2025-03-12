@@ -41,7 +41,7 @@ namespace BBB.CORE.FINAL.API.Controllers
     bool endWhenNoModerator = false,
     int endWhenNoModeratorDelayInMinutes = 60,
     bool learningDashboardEnabled = true,
-    int learningDashboardCleanupDelayInMinutes = 1440,
+    int learningDashboardCleanupDelayInMinutes = 0,
 
 
     bool muteOnStart = true,

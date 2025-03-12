@@ -49,7 +49,7 @@ namespace BBB.CORE.FINAL.Requests.Meeting
         public bool learningDashboardEnabled { get; set; } = true;
 
         [XmlElement(ElementName = "learningDashboardCleanupDelayInMinutes")]
-        public int learningDashboardCleanupDelayInMinutes { get; set; } = 1440;
+        public int learningDashboardCleanupDelayInMinutes { get; set; } = 0;
 
         // Karşılama mesajı (Varsayılan: "Welcome to the meeting!")
         [XmlElement(ElementName = "welcome")]

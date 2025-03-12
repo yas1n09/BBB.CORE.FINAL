@@ -1,7 +1,10 @@
 ﻿using BBB.CORE.FINAL.BaseClasses;
 using BBB.CORE.FINAL.Helpers;
+using BBB.CORE.FINAL.Requests.LearningDashboard;
 using BBB.CORE.FINAL.Requests.Meeting;
+using BBB.CORE.FINAL.Responses.LearningDashboard;
 using BBB.CORE.FINAL.Responses.Meeting;
+
 using Newtonsoft.Json;
 using System.Text;
 
@@ -156,7 +159,20 @@ namespace BBB.CORE.FINAL.BigBlueButtonAPIClient
 
             return urlBuilder.Build("join", request);
         }
+
+
+        public async Task<GetLearningDashboardResponse> GetLearningDashboardAsync(GetLearningDashboardRequest request)
+        {
+            return await HttpGetAsync<GetLearningDashboardResponse>("GetLearningDashboard", request);
+        }
+
+
+
         #endregion
+
+
+
+
 
 
     }

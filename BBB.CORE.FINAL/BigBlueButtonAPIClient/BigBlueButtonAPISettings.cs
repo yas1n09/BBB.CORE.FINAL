@@ -8,9 +8,9 @@ namespace BBB.CORE.FINAL.BigBlueButtonAPIClient
 {
     public class BigBlueButtonAPISettings
     {
-        public string ServerAPIUrl { get; set; } = "BigBlueButtonAPIUrl";
+        public string ServerAPIUrl { get; set; } = "https://domain/bigbluebutton/api/";
 
 
-        public string SharedSecret { get; set; } = "BigBlueButtonApiSharedSecret";
+        public string SharedSecret { get; set; } = "SharedSecret";
     }
 }

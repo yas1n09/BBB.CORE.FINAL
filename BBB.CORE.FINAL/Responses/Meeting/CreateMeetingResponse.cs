@@ -68,7 +68,7 @@ namespace BBB.CORE.FINAL.Responses.Meeting
         public bool learningDashboardEnabled { get; set; } = true;
 
         [XmlElement(ElementName = "learningDashboardCleanupDelayInMinutes")]
-        public int learningDashboardCleanupDelayInMinutes { get; set; } = 1440;
+        public int learningDashboardCleanupDelayInMinutes { get; set; }
 
         // Misafir politikası (Varsayılan: "ALWAYS_ACCEPT")
         [XmlElement(ElementName = "guestPolicy")]
@@ -80,58 +80,5 @@ namespace BBB.CORE.FINAL.Responses.Meeting
 
 
 
-
-
-
-
-
-
-
-        //// Kullanıcı katıldı mı?
-        //[XmlElement(ElementName = "hasUserJoined")]
-        //public bool hasUserJoined { get; set; }
-
-
-
-        //// Toplantı zorla sonlandırıldı mı?
-        //[XmlElement(ElementName = "hasBeenForciblyEnded")]
-        //public bool hasBeenForciblyEnded { get; set; }
-
-
-
-        //// Katılımcı sayısı
-        //[XmlElement(ElementName = "participantCount")]
-        //public int participantCount { get; set; }
-
-        //// Dinleyici sayısı
-        //[XmlElement(ElementName = "listenerCount")]
-        //public int listenerCount { get; set; }
-
-        //// Sesli katılımcı sayısı
-        //[XmlElement(ElementName = "voiceParticipantCount")]
-        //public int voiceParticipantCount { get; set; }
-
-        //// Video katılımcı sayısı
-        //[XmlElement(ElementName = "videoCount")]
-        //public int videoCount { get; set; }
-
-
-
-
-
-        //// Toplantı başladı mı?
-        //[XmlElement(ElementName = "hasStarted")]
-        //public bool hasStarted { get; set; }
-
-        //// Toplantı çalışıyor mu?
-        //[XmlElement(ElementName = "running")]
-        //public string running { get; set; }
-
-
-
-        //// Katılımcı listesi
-        //[XmlArray("attendeeList")]
-        //[XmlArrayItem("attendee")]
-        //public List<string> attendeeList { get; set; } = new List<string>();
     }
 }
